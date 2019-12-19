@@ -73,7 +73,7 @@ func TestCreateNewUser(t *testing.T){
 		"name" : "Sourabh",
 		"age" : 25,
 		"company" : "Oracle",
-		"location" : "Banglore",
+		"location" : "Banaglore",
 	})
 
 	res := requestHandler(router, "POST", "/v1/user/new" , body)
@@ -113,4 +113,61 @@ func TestCreateNewUserConflict(t *testing.T){
 	res := requestHandler(router, "POST", "/v1/user/new" , body)
 
 	assert.Equal(t , http.StatusConflict , res.Code , "Expecting 409 (Conflict)")
+}
+
+// PUT
+// Updating user
+func TestUpdateUserDetail(t *testing.T){
+	body := requestBody(map[string]interface{} {
+		"name" : "Sourabh",
+		"age" : 25,
+		"company" : "Oracle",
+		"location" : "Banglore",
+	})
+
+	res := requestHandler(router, "PUT", "/v1/user/Sourabh" , body)
+
+	assert.Equal(t , http.StatusOK , res.Code , "Expecting 200 (Ok)")
+}
+
+// Checking PUT API if request body value is not correct/Missing
+func TestUpdateUserDetailBadRequest(t *testing.T){
+	body := requestBody(map[string]interface{} {
+		"name" : "Sourabh",
+		"company" : "MediBuddy",
+		"location" : "Banglore",
+	})
+
+	res := requestHandler(router, "PUT", "/v1/user/Sourabh" , body)
+
+	assert.Equal(t , http.StatusBadRequest , res.Code , "Expecting 400 (Bad request)")
+}
+
+// Checking PUT API for 404
+func TestUpdateUserDetailNotFound(t *testing.T){
+	body := requestBody(map[string]interface{} {
+		"name" : "Pranav",
+		"age" : 25,
+		"company" : "MediBuddy",
+		"location" : "Banglore",
+	})
+
+	res := requestHandler(router, "PUT", "/v1/user/Pranav" , body)
+
+	assert.Equal(t , http.StatusNotFound , res.Code , "Expecting 404 (Not found)")
+}
+
+// DELETE
+// Delting user
+func TestDeleteUserDetail(t *testing.T){
+	res := requestHandler(router, "DELETE", "/v1/user/Sourabh" , nil)
+
+	assert.Equal(t , http.StatusOK , res.Code , "Expecting 200 (Ok)")
+}
+
+// Checking DELETE API for 404
+func TestDeleteUserDetailNotFound(t *testing.T){
+	res := requestHandler(router, "DELETE", "/v1/user/Pranav" , nil)
+
+	assert.Equal(t , http.StatusNotFound , res.Code , "Expecting 404 (Not found)")
 }
