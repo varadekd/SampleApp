@@ -63,7 +63,6 @@ func CreateNewUser(c *gin.Context){
 
 	// Using ShouldBindJSON to check the functionality and handle error manually
 	err := c.ShouldBindJSON(&data)
-
 	if err != nil {
 		// In case of error we will send proper message to user
 		c.JSON(400 , gin.H{
@@ -131,4 +130,6 @@ func DeleteUserDetail(c *gin.Context){
 		"message" : "Unable to delete user with name: " + name + " because doesn't exist in our data.",
 	})
 }
+
+
 
