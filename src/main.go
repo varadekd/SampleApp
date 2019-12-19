@@ -17,8 +17,10 @@ func checkRoute() gin.HandlerFunc {
 
 // Setup gin server
 func SetupRouter() *gin.Engine{
+	gin.SetMode(gin.ReleaseMode)
+	
 	router := gin.Default()
-
+	
 	// Rendering HTML files (This is just to check how template are loaded, I will convert this into full working module as we go forward)
 	router.LoadHTMLGlob("../resources/template/*.html")
 	router.Static("/static", "../resources/static")  // Loading static files
@@ -46,7 +48,6 @@ func SetupRouter() *gin.Engine{
 func main(){
 	// Writing logs to file 
 	// If you want to print log only to console then please skip the below code from here 
-
 	gin.DisableConsoleColor() // This will disbale log color (You can skip this if you want to logs with console colors)
 	// gin.ForceConsoleColor() // Use this line when you want to print logs using console color
 
