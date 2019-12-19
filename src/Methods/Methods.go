@@ -1,6 +1,7 @@
 package Methods
 
 import (
+	"fmt"
 	"strings"
 	"github.com/gin-gonic/gin"	
 )
@@ -43,6 +44,7 @@ func GetAllUsers(c *gin.Context){
 // Fetches a specific user detail
 func GetUserDetail(c *gin.Context){
 	name := c.Param("name")
+	fmt.Println("Printing out name: " , name)
 	for _ , value := range Users{
 		// This will return if the user is found in our DB
 		if strings.ToLower(value.Name) == strings.ToLower(name){
