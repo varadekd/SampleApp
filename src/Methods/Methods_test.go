@@ -1,18 +1,38 @@
-package main
+package Methods_test
 
 import (
+	"../Methods"
 	"encoding/json"
 	"net/http"
    	"net/http/httptest"
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"io"
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"bytes"
 )
 
+// Setup gin server
+func setupRouter() *gin.Engine{
+	
+	router := gin.Default()
+
+	// Calling different methods to hanlde user grouping this routes as version v1
+	v1 := router.Group("/v1")
+	{
+		v1.GET("/users" , Methods.GetAllUsers)
+		v1.GET("/user/:name" , Methods.GetUserDetail) // Passing params
+		v1.POST("/user/new" , Methods.CreateNewUser) // Passing params 
+		v1.PUT("/user/:name" , Methods.UpdateUserDetail) // Passing params
+		v1.DELETE("/user/:name" , Methods.DeleteUserDetail) // Passing params
+	}
+
+	return router
+}
+
 // Global variable we will be using this quite often
-var router = SetupRouter()
+var router = setupRouter()
 var response map[string]interface{}
 
 // Global function that handles the request
