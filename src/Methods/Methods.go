@@ -7,10 +7,11 @@ import (
 
 // Creating struct of type user
 type User struct{
-	Name 		string 	`json:"name" binding:"required"`
-	Age 		int 	`json:"age" binding:"required"`	
-	Company		string 	`json:"company" binding:"required"`
-	Location 	string 	`json:"location"`
+	ID 			primitve.ObjectID	`json:"_id , omitempty"	bson:"_id , omitempty"`
+	Name 		string 				`json:"name" 			bson:"name" 			binding:"required"`
+	Age 		int 				`json:"age" 			bson:"name" 			binding:"required"`	
+	Company		string 				`json:"company" 		bson:"name" 			binding:"required"`
+	Location 	string 				`json:"location" 		bson:"name"`
 }
 
 // Creating a global variable for users to be used across the module
