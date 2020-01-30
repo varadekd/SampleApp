@@ -83,7 +83,7 @@ func main(){
 	
 	// Creating mongoDB connection
 	c := GetMongoClient()
-
+	c.Database("data_learning")
 	// Using ping function to check wether the DB is connected or not
     err = c.Ping(context.Background(), readpref.Primary())
     if err != nil {

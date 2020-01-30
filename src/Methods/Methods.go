@@ -1,6 +1,7 @@
 package Methods
 
 import (
+	"log"
 	"strings"
 	"github.com/gin-gonic/gin"	
 
