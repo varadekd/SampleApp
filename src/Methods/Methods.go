@@ -3,11 +3,13 @@ package Methods
 import (
 	"strings"
 	"github.com/gin-gonic/gin"	
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 // Creating struct of type user
 type User struct{
-	ID 			primitve.ObjectID	`json:"_id , omitempty"	bson:"_id , omitempty"`
+	ID 			primitive.ObjectID	`json:"_id , omitempty"	bson:"_id , omitempty"`
 	Name 		string 				`json:"name" 			bson:"name" 			binding:"required"`
 	Age 		int 				`json:"age" 			bson:"name" 			binding:"required"`	
 	Company		string 				`json:"company" 		bson:"name" 			binding:"required"`
